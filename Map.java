@@ -13,4 +13,9 @@ public class Map {
 		name = myName;
 		scale = myScale;
 	}
+	
+	//changes name of map
+	public void changeName(String newName){
+		name = newName;
+	}
 }

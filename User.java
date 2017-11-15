@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 //abstract class containing all user types
 public abstract class User {
 	//password to get into account
@@ -10,7 +12,8 @@ public abstract class User {
 	  boolean status;
 	  
 	  //change things about an item
-	  abstract void manageItem();
+	  abstract void deleteItem(LinkedList<Item> items, Item searchItem);
+	  abstract void addItem(LinkedList<Item> items, Item addItem);
 	  
 	  //get methods
 	  abstract String getPassword();
@@ -23,4 +26,7 @@ public abstract class User {
 	  abstract void setName(String newName);
 	  abstract void setWage(int newWage);
 	  abstract void setStatus(boolean newStatus);
+	  
+	  //exports data on user to a file
+	  abstract void exportData();
 }
