@@ -14,7 +14,9 @@ public class Employee extends User {
 	//what the employee is not allowed to access
 	 private Permission myPermission;
 
+	 //list of time spent working
 	 private LinkedList<Date[]> workTime;
+	 //array to keep track of when check in and out today, will be added to worktime after checkout
 	 private Date[] temp = new Date[2];
 
 	
@@ -30,6 +32,7 @@ public class Employee extends User {
 
 	//removes item
 		public void deleteItem(LinkedList<Item> items, Item searchItem){
+			//list of everything except deleted item
 			LinkedList<Item> tempList = new LinkedList<Item>();
 			Boolean isSucess = false;
 			//looks for item in list
@@ -50,9 +53,11 @@ public class Employee extends User {
 			}	    
 		}
 		
+		//adds new item to list
 		public void addItem(LinkedList<Item> items, Item addItem){
 			items.add(addItem);
 		}
+		
 		
 		public void exportData(){
 			PrintWriter writer;
@@ -72,16 +77,18 @@ public class Employee extends User {
 			
 		}
 		
+		//records check in time
 		public void checkIn(){
 			temp[0] = new Date();
 		}
 	  
+		//records check out time and adds todays times to list
 		public void checkOut(){
 			temp[1] = new Date();
 			workTime.add(temp);
 		}
 		
-
+		//calculates time worked between inputs
 		public int hoursWorked(int begin, int end){
 			int time = 0;
 			for(Date[] in: workTime){
@@ -97,30 +104,36 @@ public class Employee extends User {
 			return wage*hoursWorked(begin, end);
 		}
 
-	  //get statements
+	  //get password
 	  public String getPassword(){
 		  return password;
 	  }
+	  //gets name
 	  public String getName(){
 		  return name;
 	  }
+	  //gets wage
 	  public int getWage(){
 		  return wage;
 	  }
+	  //gets status
 	  public boolean getStatus(){
 		  return status;
 	  }
 	  
-	//set statements
+	  //set passwoord
 	  public void setPassword(String newPassword){
 		  password = newPassword;
 	  }
+	  //set name
 	  public void setName(String newName){
 		  name = newName;
 	  }
+	  //set wage
 	  public void setWage(int newWage){
 		  wage = newWage;
 	  }
+	  //set status
 	  public void setStatus(boolean newStatus){
 		  status = newStatus;
 	  }

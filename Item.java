@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
 
-
+//item in storage
 public class Item {
 
 	//name of item
@@ -29,9 +29,13 @@ public class Item {
 		name = myName;
 		quantity = myQuantity;
 		category = myCategory;
+		//number of items left when too low and a warning needs to be sent
 		Integer warningNum = myWarningNum;
+		//price of item
 		Double price = myPrice;
+		//weight of item
 		Double weight = myWeight;
+		//bar code of item
 		Integer barCode = myBarCode;
 
 		myArea = setArea;
@@ -40,42 +44,42 @@ public class Item {
 		alertVal = myAlertVal;
 	}
 
-
+	//item if little information input
 	public Item(String myName, Integer myQuantity){
 		name = myName;
 		quantity = myQuantity;
 	}
 
-
+	//gets name
 	public String getName(){
 		return name;
 	}
-
+	//gets amount of item
 	public int getQuantity(){
 		return quantity;
 	}
-
+	//sets area of item
 	public void setArea(Area newArea){
 		myArea = newArea;
 	}
-
+	//changes y value of location
 	public void setYLoc(int newY){
 		yLoc = newY;
 	}
-
+	//changes x value of location
 	public void setXLoc(int newX){
 		xLoc = newX;
 	}
-
+	//returns x value of location
 	public int getXLoc(){
 		return xLoc;
 	}
-
+	//returns y value of location
 	public int getYLoc(){
 		return yLoc;
 	}
 
-
+	//change amount of item stored
 	public int modifyQuantity(int quantity){
 		if(quantity + this.quantity < 0){
 			return -1;
@@ -89,6 +93,7 @@ public class Item {
 		}
 	}
 
+	//print info on item
 	public void exportInfo(){
 		PrintWriter writer;
 		try {

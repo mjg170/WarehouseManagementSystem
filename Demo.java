@@ -21,15 +21,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Date;
 
+//main program
 public class Demo {
 
 
 
 	private Object aNull;
 
+	//main method
 	public static void main(String[] args) {
 
-
+		
 		SaveObject so = new SaveObject();
 		Connection conn = connect();
 		blockchain[] bc = new blockchain[1];
@@ -40,6 +42,7 @@ public class Demo {
 		}
 		LinkedList<transaction> transactions = new LinkedList<transaction>();
 
+		//creates window to log in
 		JFrame loginWindow = new JFrame("Login Window");
 		loginWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JFrame employeeWindow = new JFrame("Employee Screen");
@@ -58,7 +61,7 @@ public class Demo {
 
 
 
-
+		//window for an employee user
 		JPanel employeePanel = new JPanel(new FlowLayout());
 
 		JButton addItem = new JButton("Add/Remove Item");
@@ -69,6 +72,7 @@ public class Demo {
 		});
 		employeePanel.add(addItem);
 
+		//button to log out
 		Button logoutButton = new Button("Log Out");
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,6 +81,7 @@ public class Demo {
 		});
 		employeePanel.add(logoutButton);
 
+		//displays the log for the user
 		Button displayLog = new Button("Display Log");
 		displayLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,22 +90,29 @@ public class Demo {
 		});
 		employeePanel.add(displayLog);
 
+		//brings up search menu
 		JButton search = new JButton("search");
 		employeePanel.add(search);
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//the actual search window
 				JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+				//a label for the textbox
 				JLabel searchItemText = new JLabel("Item:");
 				searchItemText.setFont(new Font("Arial", 1, 12));
 				searchPanel.add(searchItemText);
+				//textbox to put item to be searched
 				JTextField searchInput = new JTextField(15);
 				searchPanel.add(searchInput);
+				//button to tell the program to start searching
 				JButton confirmButton = new JButton("Confirm");
 
+				//label to detail what the category is
 				JLabel categoryText = new JLabel("Category:");
 				categoryText.setFont(new Font("Arial", 1, 12));
 				searchPanel.add(categoryText);
 
+				//textbox to search by category
 				JTextField categoryInput = new JTextField(15);
 				searchPanel.add(categoryInput);
 				searchPanel.add(confirmButton);
@@ -116,6 +128,7 @@ public class Demo {
 						JPanel resultPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 						resultPanel.setLayout(new BoxLayout(resultPanel, BoxLayout.Y_AXIS));
 
+						//new frame for search results
 						JFrame resultFrame = new JFrame("Searching result");
 						resultFrame.getContentPane().add(resultPanel);
 						resultFrame.setVisible(true);
@@ -131,19 +144,24 @@ public class Demo {
 		// New panel to choose
 		JPanel loginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
+		//button to log in
 		loginButton = new JButton("Login");
 
+		//identifies adjacent text box
 		JLabel nameText = new JLabel("Name:");
 		nameText.setFont(new Font("Arial", 1, 12));
 		loginPanel.add(nameText);
 
+		//textbox for username
 		JTextField usernameInput = new JTextField(20);
 		loginPanel.add(usernameInput);
 
+		//identifies adjacent text box
 		JLabel passwordText = new JLabel("Password:");
 		passwordText.setFont(new Font("Arial", 1, 12));
 		loginPanel.add(passwordText);
 
+		//textbox for password
 		JTextField passwordInput = new JTextField(18);
 		loginPanel.add(passwordInput);
 
@@ -225,24 +243,33 @@ public class Demo {
 		loginWindow.setVisible(true);
 	}
 
+	//login for administrator
 	private static void loginAdmin(String name, Connection conn) {
+		//window for admin users
 		JFrame adminWindow = new JFrame("Admin");
 		adminWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//panel for window
 		JPanel adminPanel = new JPanel();
+		//button to open manage area menu
 		JButton manageAreaButtom = new JButton("Manage Area");
 		manageAreaButtom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//window to manage area
 				JFrame areaManageWindow = new JFrame("Manage Area");
 				areaManageWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				//panel in window
 				JPanel areaManagePanel = new JPanel();
+				//button to add a new map
 				JButton newMapButtom = new JButton("New Map");
 				areaManagePanel.add(newMapButtom);
 				newMapButtom.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						//window if adding new map
 						JFrame uploadMapWindow = new JFrame("Upload");
 						uploadMapWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						//panel for window
 						JPanel uploadPanel = new JPanel();
 						JFileChooser fc = new JFileChooser();
 						uploadPanel.add(fc);
@@ -408,8 +435,10 @@ public class Demo {
 		staffPanel.add(imageLabel);
 		String sql = "select name from map";
 		ArrayList<String> nameList = new ArrayList<>();
+		//button to get more details on area
 		JButton viewAreaButtom = new JButton("View Area");
 		staffPanel.add(viewAreaButtom);
+		//button to bring up log
 		JButton viewLogButtom = new JButton("View Log");
 		staffPanel.add(viewLogButtom);
 		String[] file = new String[1];
@@ -440,6 +469,7 @@ public class Demo {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				String sql = "select location from map where name = ?";
+				//map iamge
 				BufferedImage image = null;
 				try {
 					PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -491,28 +521,38 @@ public class Demo {
 
 	}
 
+	//window for manager
 	public static void loginManager(int mid, String name,Connection conn) {
+		//frame for manager
 		JFrame managerWindow = new JFrame("Manager");
 		managerWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//panel for frame
 		JPanel managerPanel = new JPanel();
+		//brings up menu to manage areas
 		JButton manageAreaButtom = new JButton("Manage Area");
 		manageAreaButtom.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//window to manage areas
 				JFrame areaManageWindow = new JFrame("Manage Area");
 				areaManageWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				//panel to go into frame
 				JPanel areaManagePanel = new JPanel();
+				//button to add a new map
 				JButton newMapButtom = new JButton("New Map");
 
 				areaManagePanel.add(newMapButtom);
 				newMapButtom.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						//window for uploading maps
 						JFrame uploadMapWindow = new JFrame("Upload");
 						uploadMapWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						//panel for window
 						JPanel uploadPanel = new JPanel();
 						JFileChooser fc = new JFileChooser();
 						uploadPanel.add(fc);
+						//makes sure image of acceptable file type
 						FileNameExtensionFilter filter = new FileNameExtensionFilter(
 								"Images", "jpg", "gif","png");
 						fc.setFileFilter(filter);
@@ -559,9 +599,12 @@ public class Demo {
 		JLabel imageLabel = new JLabel(new ImageIcon());
 		managerPanel.add(imageLabel);
 		String sql = "select name from map";
+		//list of map names
 		ArrayList<String> nameList = new ArrayList<>();
+		//button to get information on area
 		JButton viewAreaButtom = new JButton("View Area");
 		managerPanel.add(viewAreaButtom);
+		//button to open window and see log
 		JButton viewLogButtom = new JButton("View Log");
 		managerPanel.add(viewLogButtom);
 		String[] file = new String[1];
@@ -617,6 +660,7 @@ public class Demo {
 			areaModel.addRow(new Object[]{nameList.get(i)});
 		}
 
+		//brings up window to alter data of users
 		JButton manageButtom = new JButton("Manage People");
 		managerPanel.add(manageButtom);
 		manageButtom.addActionListener(new ActionListener() {
@@ -656,6 +700,7 @@ public class Demo {
 
 	}
 
+	//shwos message box with input text
 	public static void popup(JFrame frame,String message) {
 		JOptionPane.showMessageDialog(frame,message);
 	}
@@ -678,8 +723,11 @@ public class Demo {
 		return bos != null ? bos.toByteArray() : null;
 	}
 
+	//manage items in an area
 	public static void viewAreaItemManger(String mapname,String name, Connection conn,String filename) {
+		//window
 		JFrame viewAreaWindow = new JFrame("View Area's Item");
+		//panel for window
 		JPanel viewAreaPanel = new JPanel();
 		viewAreaWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		viewAreaWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -701,11 +749,15 @@ public class Demo {
 		ArrayList<Integer> quantityList = new ArrayList<Integer>();
 		ArrayList<String> categoryList = new ArrayList<String>();
 		ArrayList<Integer> warningnumList = new ArrayList<Integer>();
+		//button to add or remove item
 		JButton addItemButtom = new JButton("Add/Remove");
+		//label explaning text field
 		JLabel searchLabel = new JLabel("Search");
 		viewAreaPanel.add(searchLabel);
+		//textbox to put in name of item
 		JTextField searchInput = new JTextField(10);
 		viewAreaPanel.add(searchInput);
+		//button to begin search
 		JButton searchButtom = new JButton("Search");
 		viewAreaPanel.add(searchButtom);
 		searchButtom.addActionListener(new ActionListener() {
@@ -715,6 +767,7 @@ public class Demo {
             }
         });
 		viewAreaPanel.add(addItemButtom);
+		//look at location of item
 		JButton manageLocationButtom = new JButton("View Location");
 		viewAreaPanel.add(manageLocationButtom);
 		manageLocationButtom.addActionListener(new ActionListener() {
@@ -723,6 +776,7 @@ public class Demo {
                 show(String.valueOf(itemTable.getValueAt(itemTable.getSelectedRow(),0)),mapname,filename,conn);
             }
         });
+		//change location of item
 		JButton editLocationButtom = new JButton("Edit Location");
 		viewAreaPanel.add(editLocationButtom);
 		editLocationButtom.addActionListener(new ActionListener() {
@@ -763,29 +817,36 @@ public class Demo {
 	}
 
 	public static void addItem(String areaname,String role, String name, Connection conn,DefaultTableModel model) {
+		//window if adding item
 		JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
+		//label for textbox
 		JLabel itemText = new JLabel("Item:");
 		itemText.setFont(new Font("Arial", 1, 12));
 		itemPanel.add(itemText);
 
+		//input name of item
 		JTextField itemInput = new JTextField(15);
 		itemPanel.add(itemInput);
 
+		//label for textbox
 		JLabel quantityText = new JLabel("Quantity:");
 		quantityText.setFont(new Font("Arial", 1, 12));
 		itemPanel.add(quantityText);
 
+		//input for amount of item
 		JTextField quantityInput = new JTextField(15);
 		itemPanel.add(quantityInput);
 
+		//label for textbox
 		JLabel categoryText = new JLabel("Category:");
 		quantityText.setFont(new Font("Arial", 1, 12));
 		itemPanel.add(categoryText);
 
+		//imput for category of item
 		JTextField categoryInput = new JTextField(15);
 		itemPanel.add(categoryInput);
 
+		//label for textbox
 		JLabel warningText = new JLabel("Warning Number:");
 		warningText.setFont(new Font("Arial", 1, 12));
 		itemPanel.add(warningText);
@@ -793,7 +854,7 @@ public class Demo {
 		JTextField warningInput = new JTextField(15);
 		itemPanel.add(warningInput);
 
-
+		//button to create item from input
 		JButton confirmButton = new JButton("Confirm");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -935,10 +996,15 @@ public class Demo {
 		addItemFrame.setVisible(true);
 	}
 
+	//search for item
 	public static void searchItem(String areaname, String name, Connection conn, DefaultTableModel model) {
+		//list of items
         ArrayList<String> nameList = new ArrayList<String>();
+        //list of the amount for each item
         ArrayList<Integer> quantityList = new ArrayList<Integer>();
+        //list of category of each item
         ArrayList<String> categoryList = new ArrayList<String>();
+        //list of warning numbers for each item
         ArrayList<Integer> warningnumList = new ArrayList<Integer>();
         String sql;
         if (name.isEmpty()) {
@@ -978,7 +1044,9 @@ public class Demo {
 
     }
 
+	//open window that has log info
     public static void showLog(String role, String name, Connection conn) {
+    	//panel to go into window
         JPanel logPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         String sql = "SELECT content,time from log";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -991,6 +1059,7 @@ public class Demo {
         } catch (SQLException e1) {
             System.out.println(e1.getMessage());
         }
+        //actual window
         JFrame logFrame = new JFrame("Record of Logs");
         logFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         logFrame.setVisible(true);
@@ -998,9 +1067,12 @@ public class Demo {
         logFrame.getContentPane().add(logPanel);
     }
 
+    //shows map for item
     public static void show(String name,String areaname,String file,Connection conn) {
 	    String sql = "select xloc,yloc from item where mapname = ? and name = ?";
+	    //x coordiante
 	    int xloc = 0;
+	    //y coordinate
 	    int yloc = 0;
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setString(1,areaname);
@@ -1013,14 +1085,19 @@ public class Demo {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+	    //temporary item
         Item item = new Item("temp",1,"temp",0,0.0,0.0,0,null,yloc,xloc,10);
+        //map to display
 	    Map map = new Map("temp",0,0,file);
 	    map.show(item);
     }
 
+    //change location of item
     public static void setLocation(String name,String areaname,String file,Connection conn) {
         String sql = "select xloc,yloc from item where mapname = ? and name = ?";
+        //termporary item
         Item item = new Item("temp",1,"temp",0,0.0,0.0,0,null,0,0,10);
+        //map to show user
         Map map = new Map("temp",0,0,file);
         map.set(item,conn,areaname,name);
     }

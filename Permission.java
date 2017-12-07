@@ -5,9 +5,9 @@ public class Permission {
 	  private String[] items;
 	 
 	  //instantiation
-	  public Permission(){
-		    items = new String[0]; 
-	}
+	 public Permission(){
+		  items = new String[0]; 
+	 }
 		  
 	  //check to see if item is in restricted list
 	  public Boolean checkPermission(String search){

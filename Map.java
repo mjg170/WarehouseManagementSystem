@@ -23,6 +23,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.imageio.ImageIO;
 
+//map to help determine the location of objects
 public class Map {
 	//what floor the map depicts
 	private int floor;
@@ -45,6 +46,7 @@ public class Map {
 
 	}
 
+	//map instantion if less info
 	public Map(String file) {
 		fileName = file;
 
@@ -57,10 +59,12 @@ public class Map {
 	}
 
 
-	//makes new panel for map
+	//makes new panel for map if want to see current location
 	public void show(Item itemType) {
+		//actual window
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//map window
 		mapPanel mp = new mapPanel(itemType);
 		frame.add(mp);
 		frame.pack();
@@ -68,9 +72,12 @@ public class Map {
 		frame.setVisible(true);
 	}
 
+	//makes new panel for map if want to change location
 	public void set(Item itemType, Connection conn, String areaname, String name){
+		//window
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//map window
 		mapPanelNew mp = new mapPanelNew(itemType,conn,areaname,name);
 		frame.add(mp);
 		frame.pack();
@@ -78,22 +85,25 @@ public class Map {
 		frame.setVisible(true);
 	}
 
-	//actual map panel
+	//actual map panel if changing location of item
 	public class mapPanelNew extends JPanel{
 		//point where item is
 		private Point point;
 		//background image
 		private BufferedImage image;
 
+		//returns height of imgae
 		public int getHeight() {
 			return image.getHeight();
 
 		}
 
+		//returns width of image
 		public int getWidth() {
 			return image.getWidth();
 		}
-
+		
+		//makes map panel
 		public mapPanelNew(final Item itemType,Connection conn, String areaname, String name) {
 			try {
 				image = ImageIO.read(new File(fileName));
@@ -105,7 +115,9 @@ public class Map {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					point = (e.getPoint());
+					//x coordinate
 					int xloc = (int)point.getX();
+					//y coordinate
 					int yloc = (int)point.getY();
 					String sql = "UPDATE item SET xloc = ? , yloc = ? where mapname = ? and name = ?";
 					try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -122,6 +134,7 @@ public class Map {
 					repaint();
 				}
 			});
+			//button to confirm location
 			JButton confirmButton = new JButton("Confirm");
 			confirmButton.addActionListener(new ActionListener(){
 				//saves coordinates
@@ -150,32 +163,32 @@ public class Map {
 		}
 	}
 
-	//actual map panel
-
+	//actual map panel if searching for item
 	public class mapPanel extends JPanel{
 		//point where item is
 		private Point point;
 		//background image
-
 		private BufferedImage image;
 
+		//return heihgt of image
 		public int getHeight() {
 			return image.getHeight();
 
 		}
 
+		//width of image
 		public int getWidth() {
 			return image.getWidth();
 		}
 
-
+		//instantiation
 		public mapPanel(final Item itemType) {
 			try {
 				image = ImageIO.read(new File(fileName));
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-
+			//point to draw
 			point = new Point(itemType.getXLoc(), itemType.getYLoc());
 			repaint();
 

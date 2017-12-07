@@ -22,30 +22,36 @@ public class Manager extends User {
 			    
 	}
 	  
-	//get statments
+	//get password
 	public String getPassword(){
 		return password;
 	}
+	//get name
 	public String getName(){
 		return name;
 	}
+	//get wage
 	public int getWage(){
 		return wage;
 	}
+	//get status
 	public boolean getStatus(){
 		return status;
 	}
 	  
-	//set statements
+	//set password
 	public void setPassword(String newPassword){
 		password = newPassword;
 	}
+	//set name
 	public void setName(String newName){
 		name = newName;
 	}
+	//set wage
 	public void setWage(int newWage){
 		wage = newWage;
 	}
+	//set status
 	public void setStatus(boolean newStatus){
 		status = newStatus;
 	}
