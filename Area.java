@@ -10,9 +10,10 @@ public class Area {
 		name = myName;
 	}
 	
-	//changes map of area
-	public void addMap(String myName, Integer myFloor, Integer myScale){
-		myMap = new Map(myName, myFloor, myScale);
+
+	public void addMap(String myName, Integer myFloor, Integer myScale, String file){
+		myMap = new Map(myName, myFloor, myScale, file);
+
 	}
 	
 	//get method

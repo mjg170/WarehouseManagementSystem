@@ -1,3 +1,4 @@
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -6,14 +7,16 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
 //a standard employee
 public class Employee extends User {
 	
 	//what the employee is not allowed to access
 	 private Permission myPermission;
+
 	 private LinkedList<Date[]> workTime;
 	 private Date[] temp = new Date[2];
-	 
+
 	
 	 //instantiation
 	  public Employee(String newPassword, String newName, int newWage, Boolean newStatus){
@@ -24,6 +27,7 @@ public class Employee extends User {
 		  	status = newStatus;
 	  }
 	  
+
 	//removes item
 		public void deleteItem(LinkedList<Item> items, Item searchItem){
 			LinkedList<Item> tempList = new LinkedList<Item>();
@@ -92,7 +96,7 @@ public class Employee extends User {
 		public int calcPay(int begin, int end){
 			return wage*hoursWorked(begin, end);
 		}
-		
+
 	  //get statements
 	  public String getPassword(){
 		  return password;
