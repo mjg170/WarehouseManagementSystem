@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
@@ -6,11 +7,13 @@ import java.io.*;
 public class Item {
 
 	//name of item
+
 	private String name;
 	//number of the item stored
 	private int quantity;
 	//type of item stored
 	private String category;
+
 	//Area item is in
 	private Area myArea;
 	//y coordinate on map
@@ -22,6 +25,7 @@ public class Item {
 
 	//instantiation
 	public Item(String myName, Integer myQuantity, String myCategory, Integer myWarningNum, Double myPrice, Double myWeight, Integer myBarCode, Area setArea, int myYLoc, int myXLoc, int myAlertVal){
+
 		name = myName;
 		quantity = myQuantity;
 		category = myCategory;
@@ -29,16 +33,19 @@ public class Item {
 		Double price = myPrice;
 		Double weight = myWeight;
 		Integer barCode = myBarCode;
+
 		myArea = setArea;
 		yLoc = myYLoc;
 		xLoc = myXLoc;
 		alertVal = myAlertVal;
 	}
 
+
 	public Item(String myName, Integer myQuantity){
 		name = myName;
 		quantity = myQuantity;
 	}
+
 
 	public String getName(){
 		return name;
@@ -68,11 +75,13 @@ public class Item {
 		return yLoc;
 	}
 
+
 	public int modifyQuantity(int quantity){
 		if(quantity + this.quantity < 0){
 			return -1;
 		}
 		else{
+
 			if(this.quantity < alertVal){
 				JOptionPane.showMessageDialog(new JFrame("error"), "Amount of item low.  More should be added soon.");
 			}
@@ -98,4 +107,5 @@ public class Item {
 		}
 
 	}
+
 }

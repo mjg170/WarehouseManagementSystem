@@ -1,3 +1,4 @@
+
 import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
@@ -16,10 +17,12 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.Date;
 
 public class Demo {
+
 
 
 	private Object aNull;
@@ -1477,5 +1480,6 @@ public class Demo {
 		}
 		return conn;
 	}
+
 
 }

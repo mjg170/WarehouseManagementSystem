@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
@@ -28,6 +30,7 @@ public class Map {
 	private String name;
 	//scale of map (to determine size)
 	private int scale;
+
 
 	private String fileName;
 
@@ -47,10 +50,12 @@ public class Map {
 
 	}
 
+
 	//changes name of map
 	public void changeName(String newName){
 		name = newName;
 	}
+
 
 	//makes new panel for map
 	public void show(Item itemType) {
@@ -146,10 +151,12 @@ public class Map {
 	}
 
 	//actual map panel
+
 	public class mapPanel extends JPanel{
 		//point where item is
 		private Point point;
 		//background image
+
 		private BufferedImage image;
 
 		public int getHeight() {
@@ -193,4 +200,5 @@ public class Map {
 
 	}
 }
+
 
