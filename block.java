@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class block{
+public class block implements Serializable{
 	private node head = null;
 	private block previous = null;
 	private block next = null;
@@ -13,6 +14,7 @@ public class block{
 	public long timeStamp = System.currentTimeMillis();
 	private int nonce = 0;
 	
+	//Constructor for a block
 	public block(block previous, transaction[] transactions) throws NoSuchAlgorithmException{
 		this.transactions = transactions;
 		head = buildMarkovTree(transactions);
@@ -22,7 +24,8 @@ public class block{
 		hashCode = calculateHashCode();
 	}
 	
-	public block(){
+	//Constructor for the very first block
+	public block(String string){
 		//Genesis Constructor
 		hashCode = new byte[32];
 		number = 1;
@@ -31,6 +34,11 @@ public class block{
 		}
 	}
 	
+	public block(){
+		//Empty Constructor
+	}
+	
+	//Builds a Markov Tree to calculate the hashcode
 	private node buildMarkovTree(transaction[] transactions) throws NoSuchAlgorithmException{
 		node left = null;
 		node right = null;
@@ -94,26 +102,32 @@ public class block{
 		return buildArray[0];
 	}
 	
+	//Returns the block's hashCode
 	public byte[] getHashCode(){
 		return hashCode;
 	}
 	
+	//Returns the list of transactions
 	public transaction[] getTransactions(){
 		return transactions;
 	}
 	
+	//Returns the block's next block
 	public block getNext(){
 		return next;
 	}
 	
+	//Gets the number that the block is 
 	public int getNumber(){
 		return number;
 	}
 	
+	//Sets the block's next block
 	public void setNext(block next){
 		this.next = next;
 	}
 	
+	//Calculates the hashCode from the previous block and hashCode of the Markov Tree
 	private byte[] calculateHashCode() throws NoSuchAlgorithmException {
 		byte[] tempHash;
 		byte[] byteNonce;
